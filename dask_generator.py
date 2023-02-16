@@ -54,7 +54,7 @@ def concatenate(camera_names, time_len):
   angle = np.concatenate(angle, axis=0)
   speed = np.concatenate(speed, axis=0)
   filters = np.concatenate(filters, axis=0).ravel()
-  print "training on %d/%d examples" % (filters.shape[0], angle.shape[0])
+  print("training on %d/%d examples" % (filters.shape[0], angle.shape[0]))
   return c5x, angle, speed, filters, hdf5_camera
 
 
