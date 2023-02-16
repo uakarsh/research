@@ -49,7 +49,7 @@ def concatenate(camera_names, time_len):
     except IOError:
       import traceback
       traceback.print_exc()
-      print "failed to open", tword
+      print("failed to open", tword)
 
   angle = np.concatenate(angle, axis=0)
   speed = np.concatenate(speed, axis=0)
