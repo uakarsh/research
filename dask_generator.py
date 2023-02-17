@@ -64,7 +64,7 @@ first = True
 
 
 ## Defining the collate function for pytorch dataloader
-def collate_fn_benchmark(x_batch, transform):
+def collate_fn_benchmark(x_batch, transform = None):
   
   if transform is None:
     return torch.tensor(x_batch / 255.0)
@@ -144,7 +144,7 @@ def datagen_benchmark(filter_files, time_len=1, batch_size=256, ignore_goods=Fal
 #         print("speed", speed_batch.shape)
 #         first = False
       
-      torch_x_batch = collate_fn_benchmark(X_batch)
+      torch_x_batch = collate_fn_benchmark(X_batch, transform = transform)
       torch_angle_batch = torch.tensor(angle_batch) / 100.0  ## rescaling
       yield {"center_img" : torch_x_batch, "center_steer" : torch_angle_batch}
 
