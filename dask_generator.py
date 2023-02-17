@@ -8,6 +8,8 @@ import h5py
 import time
 import logging
 import traceback
+import torch
+
 
 # logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
@@ -61,7 +63,19 @@ def concatenate(camera_names, time_len):
 first = True
 
 
-def datagen(filter_files, time_len=1, batch_size=256, ignore_goods=False):
+## Defining the collate function for pytorch dataloader
+def collate_fn(x_batch, transform):
+  output = []
+  
+  for x in x_batch:
+    output.append(transform(x))
+  
+  output = torch.stack(output, axis = 0)
+  return output
+  
+  
+
+def datagen_benchmark(filter_files, time_len=1, batch_size=256, ignore_goods=False, transform = None):
   """
   Parameters:
   -----------
@@ -125,8 +139,10 @@ def datagen(filter_files, time_len=1, batch_size=256, ignore_goods=False):
 #         print("angle", angle_batch.shape)
 #         print("speed", speed_batch.shape)
 #         first = False
-
-      yield (X_batch, angle_batch, speed_batch)
+      
+      torch_x_batch = 
+      torch_angle_batch = torch.tensor(angle_batch) / 100.0  ## rescaling
+      yield {"center_img" : torch_x_batch, "center_steer" : torch_angle_batch}
 
     except KeyboardInterrupt:
       raise
