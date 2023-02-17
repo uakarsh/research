@@ -42,7 +42,7 @@ def concatenate(camera_names, time_len):
         filters.append(np.argwhere(goods)[time_len-1:] + (lastidx+time_len-1))
         lastidx += goods.shape[0]
         # check for mismatched length bug
-        print("x {} | t {} | f {}".format(x.shape[0], steering_angle.shape[0], goods.shape[0]))
+        # print("x {} | t {} | f {}".format(x.shape[0], steering_angle.shape[0], goods.shape[0]))
         if x.shape[0] != angle[-1].shape[0] or x.shape[0] != goods.shape[0]:
           raise Exception("bad shape")
 
